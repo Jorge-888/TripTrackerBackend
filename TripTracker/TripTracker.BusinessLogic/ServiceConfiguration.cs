@@ -18,21 +18,20 @@ namespace TripTracker.BusinessLogic
             //services.AddScoped<MunicipioRepository>();
             //services.AddScoped<CargoRepository>();
             //services.AddScoped<AreaRepository>();
-            //services.AddScoped<DeduccionRepository>();
-            services.AddScoped<UsuarioRepository>();
             //services.AddScoped<EstadoCivilRepository>();
             //services.AddScoped<RolRepository>();
-            //services.AddScoped<FrecuenciaPagoRepository>();
-            //services.AddScoped<EmpleadoRepository>();
-            //services.AddScoped<PlanillaRepository>();
+
+            services.AddScoped<UsuarioRepository>();
+            services.AddScoped<GeneralRepository>();
+            services.AddScoped<ViajeRepository>();
 
             TripTrackerContext.BuildConnectionString(connectionString);
         }
 
         public static void BusinessLogic(this IServiceCollection services)
         {
-            //services.AddScoped<GeneralServices>();
-            //services.AddScoped<RecursosHumanosServices>();
+            services.AddScoped<GeneralServices>();
+            services.AddScoped<ViajeServices>();
             services.AddScoped<AccesoServices>();
 
         }

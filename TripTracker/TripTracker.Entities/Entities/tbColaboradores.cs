@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TripTracker.Entities.Entities;
 
@@ -38,6 +39,44 @@ public partial class tbColaboradores
     public int? Usua_Modificacion { get; set; }
 
     public DateTime? Colb_FechaModificacion { get; set; }
+
+    [NotMapped]
+    public string? sucursalesJson { get; set; }
+
+    [NotMapped]
+    public int? SuCo_Id { get; set; }
+
+    [NotMapped]
+    public decimal? SuCo_DistanciaCasa { get; set; }
+
+    [NotMapped]
+    public int? Sucu_Id { get; set; }
+
+    [NotMapped]
+    public string? Sucu_Descripcion { get; set; }
+
+    [NotMapped]
+    public string? EsCi_Descripcion { get; set; }
+
+    [NotMapped]
+    public string? Muni_Descripcion { get; set; }
+
+    [NotMapped]
+    public string? Depa_Descripcion { get; set; }
+
+    [NotMapped]
+    public string? Area_Descripcion { get; set; }
+
+    [NotMapped]
+    public string? Carg_Descripcion { get; set; }
+
+    [NotMapped]
+    public string? UsuarioCreacion { get; set; }
+
+    [NotMapped]
+    public string? UsuarioModificacion { get; set; }
+    
+
 
     public virtual tbAreas Area { get; set; }
 

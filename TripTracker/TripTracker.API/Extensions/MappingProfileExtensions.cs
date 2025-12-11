@@ -17,11 +17,10 @@ namespace TripTracker.API.Extensions
             //CreateMap<tbAreas, AreaViewModel>().ReverseMap();
             CreateMap<tbUsuarios, UsuariosViewModel>().ReverseMap();
             //CreateMap<tbEstadosCiviles, EstadoCivilViewModel>().ReverseMap();
-            //CreateMap<tbRoles, RolViewModel>().ReverseMap();
-            //CreateMap<tbDeducciones, DeduccionViewModel>().ReverseMap();
-            //CreateMap<tbFrecuenciasPago, FrecuenciaPagoViewModel>().ReverseMap();
-            //CreateMap<tbEmpleados, EmpleadoViewModel>().ReverseMap();
-            //CreateMap<tbPlanillas, PlanillaViewModel>().ReverseMap();
+            CreateMap<tbColaboradores, ColaboradoresViewModel>().ReverseMap();
+            CreateMap<tbSucursales, SucursalesViewModel>().ReverseMap();
+            CreateMap<tbViajes, ViajesViewModel>().ReverseMap();
+
 
 
 

@@ -17,8 +17,34 @@ namespace TripTracker.DataAccess.Repositories
         
         public RequestStatus Delete(tbUsuarios item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                return new RequestStatus { CodeStatus = 0, MessageStatus = "Los datos llegaron vacíos o datos erróneos." };
+            }
+            var parameters = new DynamicParameters();
+            parameters.Add("@Usua_Id", item.Usua_Id, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameters.Add("@Usua_Modificacion", item.Usua_Modificacion, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameters.Add("@Usua_FechaModificacion", item.Usua_FechaModificacion, System.Data.DbType.DateTime, System.Data.ParameterDirection.Input);
+
+            try
+            {
+                using var db = new SqlConnection(TripTrackerContext.ConnectionString);
+                var result = db.QueryFirstOrDefault<RequestStatus>(ScriptDatabase.Usuario_Eliminar, parameters, commandType: System.Data.CommandType.StoredProcedure);
+
+                if (result == null)
+                {
+                    return new RequestStatus { CodeStatus = 0, MessageStatus = "Error desconocido." };
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new RequestStatus { CodeStatus = 0, MessageStatus = $"Error inesperado: {ex.Message}" };
+            }
         }
+
+
+
 
         public tbUsuarios Find(int? id)
         {
@@ -35,12 +61,12 @@ namespace TripTracker.DataAccess.Repositories
             return result;
         }
 
-        public virtual IEnumerable<tbUsuarios> RolesList()
+        public virtual IEnumerable<tbRoles> RolesList()
         {
             var parameter = new DynamicParameters();
 
             using var db = new SqlConnection(TripTrackerContext.ConnectionString);
-            var result = db.Query<tbUsuarios>(ScriptDatabase.Usuarios_Listar, parameter, commandType: System.Data.CommandType.StoredProcedure).ToList();
+            var result = db.Query<tbRoles>(ScriptDatabase.Roles_Listar, parameter, commandType: System.Data.CommandType.StoredProcedure).ToList();
 
             return result;
         }
@@ -107,7 +133,66 @@ namespace TripTracker.DataAccess.Repositories
 
         public RequestStatus Update(tbUsuarios item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                return new RequestStatus { CodeStatus = 0, MessageStatus = "Los datos llegaron vacíos o datos erróneos." };
+            }
+            var parameter = new DynamicParameters();
+            parameter.Add("@Usua_Id", item.Usua_Id, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameter.Add("@Usua_Nombre", item.Usua_Nombre, System.Data.DbType.String, System.Data.ParameterDirection.Input);
+            //parameter.Add("@Usua_Contrasena", item.Usua_Contrasena, System.Data.DbType.String, System.Data.ParameterDirection.Input);
+            parameter.Add("@Role_Id", item.Role_Id, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameter.Add("@Colb_Id", item.Colb_Id, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameter.Add("@Usua_Admin", item.Usua_Admin, System.Data.DbType.Boolean, System.Data.ParameterDirection.Input);
+
+            parameter.Add("@Usua_Modificacion", item.Usua_Modificacion, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameter.Add("@Usua_FechaModificacion", item.Usua_FechaModificacion, System.Data.DbType.DateTime, System.Data.ParameterDirection.Input);
+
+            try
+            {
+                using var db = new SqlConnection(TripTrackerContext.ConnectionString);
+                var result = db.QueryFirstOrDefault<RequestStatus>(ScriptDatabase.Usuario_Actualizar, parameter, commandType: System.Data.CommandType.StoredProcedure);
+
+                if (result == null)
+                {
+                    return new RequestStatus { CodeStatus = 0, MessageStatus = "Error desconocido." };
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new RequestStatus { CodeStatus = 0, MessageStatus = $"Error inesperado: {ex.Message}" };
+            }
+        }
+
+
+        public RequestStatus Reset(tbUsuarios item)
+        {
+            if (item == null)
+            {
+                return new RequestStatus { CodeStatus = 0, MessageStatus = "Los datos llegaron vacíos o datos erróneos." };
+            }
+            var parameters = new DynamicParameters();
+            parameters.Add("@Usua_Id", item.Usua_Id, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameters.Add("@Usua_Contrasena", item.Usua_Contrasena, System.Data.DbType.String, System.Data.ParameterDirection.Input);
+            parameters.Add("@Usua_Modificacion", item.Usua_Modificacion, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameters.Add("@Usua_FechaModificacion", item.Usua_FechaModificacion, System.Data.DbType.DateTime, System.Data.ParameterDirection.Input);
+
+            try
+            {
+                using var db = new SqlConnection(TripTrackerContext.ConnectionString);
+                var result = db.QueryFirstOrDefault<RequestStatus>(ScriptDatabase.Usuario_Reestablecer, parameters, commandType: System.Data.CommandType.StoredProcedure);
+
+                if (result == null)
+                {
+                    return new RequestStatus { CodeStatus = 0, MessageStatus = "Error desconocido." };
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new RequestStatus { CodeStatus = 0, MessageStatus = $"Error inesperado: {ex.Message}" };
+            }
         }
     }
 }

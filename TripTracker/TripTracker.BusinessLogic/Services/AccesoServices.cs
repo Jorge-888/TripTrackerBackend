@@ -41,7 +41,22 @@ namespace TripTracker.BusinessLogic.Services
             }
         }
 
-        
+
+        public IEnumerable<tbRoles> ListRoles()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _usuarioRepository.RolesList();
+                return list;
+            }
+            catch (Exception ex)
+            {
+                IEnumerable<tbRoles> list = [];
+                return list;
+            }
+        }
+
 
         public tbUsuarios Login(tbUsuarios usuario)
         {
@@ -76,8 +91,48 @@ namespace TripTracker.BusinessLogic.Services
             }
         }
 
-        
 
+        public ServiceResult UpdateUsuario(tbUsuarios item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _usuarioRepository.Update(item);
+                return result.Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult DeleteUsuario(tbUsuarios item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _usuarioRepository.Delete(item);
+                return result.Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult ResetUsuario(tbUsuarios item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _usuarioRepository.Reset(item);
+                return result.Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
 
 
     }

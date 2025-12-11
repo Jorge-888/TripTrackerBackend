@@ -31,6 +31,16 @@ namespace TripTracker.API.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("ListarRoles")]
+        public IActionResult ListarRoles()
+        {
+            var result = _accesoServices.ListRoles();
+            
+            return Ok(result);
+        }
+
+
         [HttpPost("Login")]
         public IActionResult Login([FromBody] UsuariosViewModel usuario)
         {
@@ -59,6 +69,8 @@ namespace TripTracker.API.Controllers
             return Ok(result);
         }
 
+
+
         //[HttpPost("ObtenerUsuario")]
         //public IActionResult Actualizar([FromBody] UsuariosViewModel item)
         //{
@@ -67,15 +79,14 @@ namespace TripTracker.API.Controllers
         //    return Ok(result);
         //}
 
-        //[HttpPut("ActualizarUsuario")]
-        //public IActionResult Update([FromBody] UsuariosViewModel  item)
-        //{
-        //    //var tbPrestamosDetalle = await _context.tbPrestamosDetalle.FindAsync(id);
+        [HttpPut("Actualizar")]
+        public IActionResult Update([FromBody] UsuariosViewModel item)
+        {
 
-        //    var mapped = _mapper.Map<tbUsuarios>(item);
-        //    var result = _accesoServices.UpdateUsuario(mapped);
-        //    return Ok(result);
-        //}
+            var mapped = _mapper.Map<tbUsuarios>(item);
+            var result = _accesoServices.UpdateUsuario(mapped);
+            return Ok(result);
+        }
 
 
         //[HttpPut("RestablecerUsuario")]
@@ -89,12 +100,21 @@ namespace TripTracker.API.Controllers
         //}
 
 
-        //[HttpPost("EliminarUsuario")]
-        //public IActionResult Delete([FromBody] UsuariosViewModel item)
-        //{
-        //    var mapped = _mapper.Map<tbUsuarios>(item);
-        //    var result = _accesoServices.DeleteUsuario(mapped);
-        //    return Ok(result);
-        //}
+        [HttpPost("Desactivar")]
+        public IActionResult Delete([FromBody] UsuariosViewModel item)
+        {
+            var mapped = _mapper.Map<tbUsuarios>(item);
+            var result = _accesoServices.DeleteUsuario(mapped);
+            return Ok(result);
+        }
+
+        [HttpPost("Reestablecer")]
+        public IActionResult Reset([FromBody] UsuariosViewModel item)
+        {
+            var mapped = _mapper.Map<tbUsuarios>(item);
+            var result = _accesoServices.ResetUsuario(mapped);
+            return Ok(result);
+        }
+
     }
 }
