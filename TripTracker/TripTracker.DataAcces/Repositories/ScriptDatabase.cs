@@ -17,7 +17,10 @@ namespace TripTracker.DataAccess.Repositories
         public static string Colaborador_Insertar = "[Gral].[SP_tbColaboradores_Insertar]";
         public static string Colaboradores_InsertarCompleto= "Gral.SP_tbColaboradores_InsertarCompleto";
         public static string Colaborador_Actualizar = "[Gral].[SP_tbColaboradores_Actualizar]";
+        public static string Colaborador_ActualizarCompleto = "[Gral].[SP_tbColaboradores_ActualizarCompleto]";
         public static string Colaborador_Eliminar = "[Gral].[SP_tbColaboradores_Eliminar]";
+
+
 
         public static string Cargos_Listar = "[Gral].[SP_tbCargos_Listar]";
         public static string Areas_Listar = "[Gral].[SP_tbAreas_Listar]";

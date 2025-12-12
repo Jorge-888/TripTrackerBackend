@@ -41,6 +41,25 @@ namespace TripTracker.API.Controllers
             return Ok(result);
         }
 
+        [HttpPut("ActualizarColaboradorCompleto")]
+        public IActionResult Actualizar([FromBody] ColaboradoresViewModel item)
+        {
+
+            var mapped = _mapper.Map<tbColaboradores>(item);
+            var result = _generalServices.UpdateColaborador(mapped);
+            return Ok(result);
+        }
+
+        [HttpPost("EliminarColaborador")]
+        public IActionResult Eliminar([FromBody] ColaboradoresViewModel item)
+        {
+
+            var mapped = _mapper.Map<tbColaboradores>(item);
+            var result = _generalServices.DeleteColaborador(mapped);
+            return Ok(result);
+        }
+
+
 
 
         [HttpGet("ListarAreas")]

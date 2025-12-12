@@ -57,6 +57,36 @@ namespace TripTracker.BusinessLogic.Services
         }
 
 
+        public ServiceResult UpdateColaborador(tbColaboradores item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _generalRepository.UpdateColaboradorCompleto(item);
+                return result.Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+
+        public ServiceResult DeleteColaborador(tbColaboradores item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _generalRepository.DeleteColaborador(item);
+                return result.Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+
         #endregion
 
 

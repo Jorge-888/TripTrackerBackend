@@ -130,5 +130,80 @@ namespace TripTracker.DataAccess.Repositories
 
 
 
+        public virtual RequestStatus UpdateColaboradorCompleto(tbColaboradores item)
+        {
+            if (item == null)
+            {
+                return new RequestStatus { CodeStatus = 0, MessageStatus = "Los datos llegaron vacíos o datos erróneos." };
+            }
+            var parameter = new DynamicParameters();
+            parameter.Add("@Colb_Id", item.Colb_Id, System.Data.DbType.Int64, System.Data.ParameterDirection.Input);
+            parameter.Add("@Colb_Nombres", item.Colb_Nombres, System.Data.DbType.String, System.Data.ParameterDirection.Input);
+            parameter.Add("@Colb_Apellidos", item.Colb_Apellidos, System.Data.DbType.String, System.Data.ParameterDirection.Input);
+            parameter.Add("@Colb_DNI", item.Colb_DNI, System.Data.DbType.String, System.Data.ParameterDirection.Input);
+            parameter.Add("@Colb_Telefono", item.Colb_Telefono, System.Data.DbType.String, System.Data.ParameterDirection.Input);
+            parameter.Add("@Colb_Sexo", item.Colb_Sexo, System.Data.DbType.String, System.Data.ParameterDirection.Input);
+            parameter.Add("@Colb_Direccion", item.Colb_Direccion, System.Data.DbType.String, System.Data.ParameterDirection.Input);
+            parameter.Add("@EsCi_Id", item.EsCi_Id, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameter.Add("@Muni_Codigo", item.Muni_Codigo, System.Data.DbType.String, System.Data.ParameterDirection.Input);
+            parameter.Add("@Area_Id", item.Area_Id, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameter.Add("@Carg_Id", item.Carg_Id, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameter.Add("@sucursalesJson", item.sucursalesJson, System.Data.DbType.String, System.Data.ParameterDirection.Input);
+
+            parameter.Add("@Usua_Modificacion", item.Usua_Modificacion, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            parameter.Add("@Colb_FechaModificacion", item.Colb_FechaModificacion, System.Data.DbType.DateTime, System.Data.ParameterDirection.Input);
+
+            try
+            {
+                using var db = new SqlConnection(TripTrackerContext.ConnectionString);
+                var result = db.QueryFirstOrDefault<RequestStatus>(ScriptDatabase.Colaboradores_InsertarCompleto, parameter, commandType: System.Data.CommandType.StoredProcedure);
+
+                if (result == null)
+                {
+                    return new RequestStatus { CodeStatus = 0, MessageStatus = "Error desconocido." };
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new RequestStatus { CodeStatus = 0, MessageStatus = $"Error inesperado: {ex.Message}" };
+            }
+        }
+
+
+        public virtual RequestStatus DeleteColaborador(tbColaboradores item)
+        {
+            if (item == null)
+            {
+                return new RequestStatus { CodeStatus = 0, MessageStatus = "Los datos llegaron vacíos o datos erróneos." };
+            }
+            var parameter = new DynamicParameters();
+            //parameter.Add("@Colb_Id", item.Colb_Id, System.Data.DbType.Int64, System.Data.ParameterDirection.Input);
+
+            //parameter.Add("@Usua_Modificacion", item.Usua_Modificacion, System.Data.DbType.Int32, System.Data.ParameterDirection.Input);
+            //parameter.Add("@Colb_FechaModificacion", item.Colb_FechaModificacion, System.Data.DbType.DateTime, System.Data.ParameterDirection.Input);
+
+            try
+            {
+                using var db = new SqlConnection(TripTrackerContext.ConnectionString);
+                var result = db.QueryFirstOrDefault<RequestStatus>(ScriptDatabase.Colaboradores_InsertarCompleto, parameter, commandType: System.Data.CommandType.StoredProcedure);
+
+                if (result == null)
+                {
+                    return new RequestStatus { CodeStatus = 0, MessageStatus = "Error desconocido." };
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new RequestStatus { CodeStatus = 0, MessageStatus = $"Error inesperado: {ex.Message}" };
+            }
+        }
+
+
+
+
+
+
     }
 }
